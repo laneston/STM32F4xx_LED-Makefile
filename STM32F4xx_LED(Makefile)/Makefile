@@ -19,12 +19,14 @@ INC += -I./User
 DEF += -DSTM32F40_41xxx 
 DEF += -DUSE_STDPERIPH_DRIVER
 
-
 CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mfloat-abi=hard
 CFLAGS += -mthumb
 CFLAGS += -mfpu=fpv4-sp-d16
+CFLAGS += -Os
 CFLAGS += -Wall
+CFLAGS += -ffunction-sections
+CFLAGS += -fdata-sections
 
 LFLAGS += -mcpu=cortex-m4
 LFLAGS += -mfloat-abi=hard
@@ -66,4 +68,5 @@ $(ELF):
 .PHONY: clean
 clean :
 	-rm ./output/*.o\
-	    ./output/*.elf
+	    ./output/*.elf\
+		./output/*.bin
