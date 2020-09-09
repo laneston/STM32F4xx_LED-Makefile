@@ -75,17 +75,8 @@ Reset_Handler:
   movs  r1, #0
   b  LoopCopyDataInit
 
-  movs  r1, #0
-  b  LoopCopyDataInitCCM
-
 CopyDataInit:
   ldr  r3, =_sidata
-  ldr  r3, [r3, r1]
-  str  r3, [r0, r1]
-  adds  r1, r1, #4
-
-CopyDataInitCCM:
-  ldr  r3, =_siccmram
   ldr  r3, [r3, r1]
   str  r3, [r0, r1]
   adds  r1, r1, #4
@@ -98,16 +89,6 @@ LoopCopyDataInit:
   bcc  CopyDataInit
   ldr  r2, =_sbss
   b  LoopFillZerobss
-
-LoopCopyDataInitCCM:
-  ldr  r0, =_sccmram
-  ldr  r3, =_eccmram
-  adds  r2, r0, r1
-  cmp  r2, r3
-  bcc  CopyDataInitCCM
-  ldr  r2, =_sbss
-  b  LoopFillZerobss
-
 
 /* Zero fill the bss segment. */  
 FillZerobss:
